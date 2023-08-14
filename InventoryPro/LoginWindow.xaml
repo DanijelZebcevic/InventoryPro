@@ -1,0 +1,38 @@
+﻿<Window x:Class="InventoryPro.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InventoryPro"
+        mc:Ignorable="d"
+        Title="Prijava u aplikaciju" Height="339" Width="409">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Text="Prijava" FontSize="28"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="Korisničko ime" FontSize="20"/>
+        <TextBox x:Name="usernameText" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Height="25" Margin="0, 10"/>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="Lozinka" FontSize="20"/>
+        <TextBox x:Name="passwordText" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Height="25" Margin="0, 10"/>
+
+        <Button x:Name="loginButton" Content="Prijava" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" MaxWidth="100" Margin="0, 10" FontSize="14" Click="loginButton_Click"/>
+        <Button x:Name="registrationButton" Content="Registracija" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" MaxWidth="100" Margin="0, 10" FontSize="14" Click="registrationButton_Click"/>
+    </Grid>
+</Window>
