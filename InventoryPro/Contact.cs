@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InventoryPro
 {
-    public class Product
+    public class Contact
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -17,8 +17,11 @@ namespace InventoryPro
 
         public string Name { get; set; }
 
-        public float PricePerUnit { get; set; }
+        public string Address { get; set; }
 
-        public int Amount { get; set; }
+        public string PhoneNumber { get; set; }
+
+        public string EmailAddress { get; set; }
+
     }
 }

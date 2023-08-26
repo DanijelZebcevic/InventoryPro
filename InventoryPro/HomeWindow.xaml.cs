@@ -26,9 +26,30 @@ namespace InventoryPro
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            MongoRepository mongoRepository = new MongoRepository();
-            List<Product> result = await mongoRepository.GetProducts();
-            dataGrid.ItemsSource = result;
+           
+            
+        }
+
+        private void homeButton_Click(object sender, RoutedEventArgs e)
+        {
+            InventoryWindow inventoryWindow = new InventoryWindow();
+            inventoryWindow.Show();
+            this.Close();
+
+        }
+
+        private void billsButton_Click(object sender, RoutedEventArgs e)
+        {
+            BillsWindow billsWindow = new BillsWindow();
+            billsWindow.Show();
+            this.Close();
+        }
+
+        private void contactButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContactsWindow contactsWindow = new ContactsWindow();
+            contactsWindow.Show();
+            this.Close();
         }
     }
 }

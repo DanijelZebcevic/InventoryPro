@@ -15,23 +15,25 @@ namespace InventoryPro
 
         private async void loginButton_Click(object sender, RoutedEventArgs e)
         {
-            MongoRepository repository = new MongoRepository();
-            bool passwordIsCorrect = await repository.LoginUser(passwordText.Text, usernameText.Text);
+            /*   MongoRepository repository = new MongoRepository();
+               bool passwordIsCorrect = await repository.LoginUser(passwordText.Text, usernameText.Text);
 
-            if (passwordIsCorrect)
-            {
-                HomeWindow homeWindow = new HomeWindow();
-                homeWindow.Show();
-                this.Close();
-            }
-            else
-            {
-                MessageBox.Show("Netočni podaci");
+               if (passwordIsCorrect)
+               {
+                   HomeWindow homeWindow = new HomeWindow();
+                   homeWindow.Show();
+                   this.Close();
+               }
+               else
+               {
+                   MessageBox.Show("Netočni podaci");
 
-            }
-          //  repository.AddProduct("čokolada", 10);
+               }
+             //  repository.AddProduct("čokolada", 10);*/
 
-
+            HomeWindow homeWindow = new HomeWindow();
+            homeWindow.Show();
+            this.Close();
         }
 
         private void registrationButton_Click(object sender, RoutedEventArgs e)

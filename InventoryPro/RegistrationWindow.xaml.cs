@@ -40,7 +40,11 @@ namespace InventoryPro
 
         }
 
-        
-
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
+        }
     }
 }

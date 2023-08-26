@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InventoryPro"
         mc:Ignorable="d"
-        Title="Prijava u aplikaciju" Height="339" Width="409">
+        Title="Prijava u aplikaciju" Height="339" Width="409" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />

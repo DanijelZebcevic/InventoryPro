@@ -44,6 +44,6 @@
         <TextBox x:Name="password2Text" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" Height="25" Margin="0, 10"/>
 
         <Button x:Name="registrationButton" Content="Registriraj" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" MaxWidth="100" Margin="0, 10" FontSize="16" Click="registrationButton_Click"/>
-        <Button x:Name="backButton" Content="Povratak" Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="2" MaxWidth="100" Margin="0, 10" FontSize="16"/>
+        <Button x:Name="backButton" Content="Povratak" Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="2" MaxWidth="100" Margin="0, 10" FontSize="16" Click="backButton_Click"/>
     </Grid>
 </Window>

@@ -1,0 +1,48 @@
+﻿<Window x:Class="InventoryPro.AddContactWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InventoryPro"
+        mc:Ignorable="d"
+        Title="AddContactWindow" WindowStartupLocation="CenterScreen" Height="295" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" Text="Ime kontakta:" FontSize="20"/>
+        <TextBox x:Name="nameText" Grid.Column="6" Grid.Row="1"/>
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="3" Text="Adresa:" FontSize="20"/>
+        <TextBox x:Name="addressText" Grid.Column="6" Grid.Row="3"/>
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="5" Text="Broj mobitela:" FontSize="20"/>
+        <TextBox x:Name="phoneNumberText" Grid.Column="6" Grid.Row="5"/>
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="7" Text="Email adresa:" FontSize="20"/>
+        <TextBox x:Name="emailText" Grid.Column="6" Grid.Row="7"/>
+
+
+        <Button Style="{StaticResource SuccessButton}" x:Name="addButton" Content="Dodaj" Grid.Column="1" Grid.Row="9" FontSize="16" Click="addButton_Click" />
+        <Button Style="{StaticResource DangerButton}" x:Name="returnButton" Content="Odustani" Grid.Column="3" Grid.Row="9" FontSize="16"  Margin="0,0,60,0" Click="returnButton_Click" />
+    </Grid>
+</Window>

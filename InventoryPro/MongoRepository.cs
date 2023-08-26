@@ -4,6 +4,13 @@ using System.Windows;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Windows.Documents;
+using System;
+using System.Collections;
+using static MongoDB.Driver.WriteConcern;
+using System.Diagnostics;
+using System.Xml.Linq;
+using System.Net.Mail;
+using System.Net;
 
 namespace InventoryPro
 {
@@ -51,13 +58,39 @@ namespace InventoryPro
 
         }
 
-        public async void AddProduct(string name, int amount)
+        public async void AddProduct(string name, int amount, float price)
         {
             string collectionName = "products";
             var collection = database.GetCollection<Product>(collectionName);
 
-            var product = new Product {Name = name, Amount = amount };
+            var product = new Product {Name = name, PricePerUnit = price, Amount = amount };
             await collection.InsertOneAsync(product);
+
+        }
+
+        public async void UpdateProduct(Product newProduct, Product oldProduct)
+        {
+            string collectionName = "products";
+            var collection = database.GetCollection<Product>(collectionName);
+
+            var updateDefinition = Builders<Product>.Update
+                .Set(p => p.Name, newProduct.Name)  
+                .Set(p => p.PricePerUnit, newProduct.PricePerUnit)  
+                .Set(p => p.Amount, newProduct.Amount);
+
+            var updateResult = await collection.UpdateOneAsync(
+                    p => p.Id == oldProduct.Id,
+                    updateDefinition);
+
+        
+        }
+
+        public async void DeleteProduct(Product p)
+        {
+            var id = p.Id;
+            var collection = database.GetCollection<Product>("products");
+            var filter = Builders<Product>.Filter.Eq(p => p.Id, id);
+            collection.DeleteOne(filter);
 
         }
 
@@ -73,6 +106,54 @@ namespace InventoryPro
                 products.Add(product);
             }
             return products;
+        }
+
+        public async Task<List<Contact>> GetContacts()
+        {
+            List<Contact> contacts = new List<Contact>();
+            var collection = database.GetCollection<Contact>("contacts");
+            var results = await collection.FindAsync(_ => true);
+
+            foreach (var contact in results.ToList())
+            {
+                contacts.Add(contact);
+            }
+            return contacts;
+        }
+
+        public async void AddContact(string name, string address, string phoneNumber, string emailAddress)
+        {
+            var collection = database.GetCollection<Contact>("contacts");
+            var contact = new Contact { Address = address, EmailAddress = emailAddress, Name = name, PhoneNumber = phoneNumber };
+
+            await collection.InsertOneAsync(contact);
+        }
+
+        public async void DeleteContact(Contact c)
+        {
+            var collection = database.GetCollection<Contact>("contacts");
+            var filter = Builders<Contact>.Filter.Eq(contact => contact.Id, c.Id);
+            collection.DeleteOne(filter);
+        }
+
+        public async void AddBill(Bill bill)
+        {
+            var collection = database.GetCollection<Bill>("bills");
+            
+            await collection.InsertOneAsync(bill);
+        }
+
+        public async Task<List<Bill>> GetBills()
+        {
+            List<Bill> bills = new List<Bill>();
+            var collection = database.GetCollection<Bill>("bills");
+            var results = await collection.FindAsync(_ => true);
+
+            foreach (var bill in results.ToList())
+            {
+                bills.Add(bill);
+            }
+            return bills;
         }
     }
 }
