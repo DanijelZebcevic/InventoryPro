@@ -155,5 +155,13 @@ namespace InventoryPro
             }
             return bills;
         }
+
+        public async void DeleteBill(Bill bill)
+        {
+            var id = bill.Id;
+            var collection = database.GetCollection<Bill>("bills");
+            var filter = Builders<Bill>.Filter.Eq(b => b.Id, id);
+            collection.DeleteOne(filter);
+        }
     }
 }

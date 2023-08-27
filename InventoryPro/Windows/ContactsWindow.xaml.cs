@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventoryPro.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,6 +52,41 @@ namespace InventoryPro
             MongoRepository mongoRepository = new MongoRepository();
             dataGrid.ItemsSource = await mongoRepository.GetContacts();
             dataGrid.Columns[0].Visibility = Visibility.Collapsed;
+        }
+
+        private void homeButton_Click(object sender, RoutedEventArgs e)
+        {
+            HomeWindow homeWindow = new HomeWindow();
+            homeWindow.Show();
+            this.Close();
+        }
+
+        private void inventoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            InventoryWindow inventoryWindow = new InventoryWindow();
+            inventoryWindow.Show();
+            this.Close();
+        }
+
+        private void billButton_Click(object sender, RoutedEventArgs e)
+        {
+            BillsWindow billsWindow = new BillsWindow();
+            billsWindow.Show();
+            this.Close();
+        }
+
+        private void deliveryButton_Click(object sender, RoutedEventArgs e)
+        {
+            DeliveryWindow deliveryWindow = new DeliveryWindow();
+            deliveryWindow.Show();
+            this.Close();
+        }
+
+        private void orderButton_Click(object sender, RoutedEventArgs e)
+        {
+            OrderWindow orderWindow = new OrderWindow();
+            orderWindow.Show();
+            this.Close();
         }
     }
 }
