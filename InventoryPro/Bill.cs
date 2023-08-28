@@ -3,6 +3,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 using System.Collections.Generic;
+using System;
 
 namespace InventoryPro
 {
@@ -13,6 +14,10 @@ namespace InventoryPro
         public string Id { get; set; }
 
         public List<Items> Items { get; set; }
+
+        public string Buyer { get; set; }
+
+        public DateTime DateOfPurchase { get; set; }
 
         public float Sum { get; set; }
     }

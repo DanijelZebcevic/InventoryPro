@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Xml.Linq;
 using System.Net.Mail;
 using System.Net;
+using System.Linq;
 
 namespace InventoryPro
 {
@@ -108,6 +109,20 @@ namespace InventoryPro
             return products;
         }
 
+        public async Task<List<Product>> GetProductsNotInList(List<Product> passedList)
+        {
+
+            IMongoCollection<Product> productsCollection = database.GetCollection<Product>("products");
+
+            List<string> selectedProductNames = passedList.Select(p => p.Name).ToList();
+            var filter = Builders<Product>.Filter.Not(
+                    Builders<Product>.Filter.Where(p => selectedProductNames.Contains(p.Name)));
+            var prodsNotInlist=productsCollection.Find(filter).ToList();
+            return prodsNotInlist;
+
+
+        }
+
         public async Task<List<Contact>> GetContacts()
         {
             List<Contact> contacts = new List<Contact>();
@@ -134,6 +149,23 @@ namespace InventoryPro
             var collection = database.GetCollection<Contact>("contacts");
             var filter = Builders<Contact>.Filter.Eq(contact => contact.Id, c.Id);
             collection.DeleteOne(filter);
+        }
+
+        public async void UpdateContact(Contact oldContact, Contact newContact)
+        {
+            var collection = database.GetCollection<Contact>("contacts");
+
+            var updateDefinition = Builders<Contact>.Update
+                .Set(c => c.Name, newContact.Name)
+                .Set(c => c.Address, newContact.Address)
+                .Set(c => c.PhoneNumber, newContact.PhoneNumber)
+                .Set(c => c.EmailAddress, newContact.EmailAddress);
+
+
+            var updateResult = await collection.UpdateOneAsync(
+                    c => c.Id == oldContact.Id,
+                    updateDefinition);
+
         }
 
         public async void AddBill(Bill bill)
@@ -163,5 +195,21 @@ namespace InventoryPro
             var filter = Builders<Bill>.Filter.Eq(b => b.Id, id);
             collection.DeleteOne(filter);
         }
+
+        public async void UpdateBill(Bill oldBill, Bill newBill) 
+        {
+            var collection = database.GetCollection<Bill>("bills");
+
+            var updateDefinition = Builders<Bill>.Update
+                .Set(b => b.Buyer, newBill.Buyer)
+                .Set(b => b.DateOfPurchase, newBill.DateOfPurchase)
+                .Set(b => b.Items, newBill.Items)
+                .Set(b => b.Sum, newBill.Sum);
+
+            var updateResult = await collection.UpdateOneAsync(
+                    b => b.Id == oldBill.Id,
+                    updateDefinition);
+        }
+
     }
 }

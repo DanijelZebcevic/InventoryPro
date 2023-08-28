@@ -86,5 +86,12 @@ namespace InventoryPro
             contactsWindow.Show();
             this.Close();
         }
+
+        private void dataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            EditBillWindow editBillWindow = new EditBillWindow(dataGrid.SelectedItem as Bill);
+            editBillWindow.Show();
+            this.Close();
+        }
     }
 }

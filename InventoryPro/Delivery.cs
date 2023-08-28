@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InventoryPro
 {
-    class Delivery
+    public class Delivery
     {
     }
 }

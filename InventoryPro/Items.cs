@@ -9,7 +9,7 @@ namespace InventoryPro
     public class Items
     {
         public Product Product { get; set; }
-        public int Amount { get; set; }
+        public int AmountBought { get; set; }
         public float Sum { get; set; }
     }
 }

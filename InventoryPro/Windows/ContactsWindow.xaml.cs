@@ -88,5 +88,18 @@ namespace InventoryPro
             orderWindow.Show();
             this.Close();
         }
+
+        private void dataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var selectedContact = dataGrid.SelectedItem as Contact;
+            if (selectedContact is not null)
+            {
+                UpdateContactWindow updateContactWindow = new UpdateContactWindow(selectedContact);
+                updateContactWindow.Show();
+                this.Close();
+            }
+            
+            
+        }
     }
 }

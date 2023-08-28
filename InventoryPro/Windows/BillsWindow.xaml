@@ -30,7 +30,7 @@
         </Grid.RowDefinitions>
         
 
-        <DataGrid Name="dataGrid" Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="3" MinHeight="100" IsReadOnly="True" AutoGenerateColumns="False">
+        <DataGrid Name="dataGrid" Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="3" MinHeight="100" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="dataGrid_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Bill ID" Binding="{Binding Id}" />
                 <DataGridTemplateColumn Header="Proizvodi">
@@ -49,6 +49,12 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Kupac" Binding="{Binding Buyer}" />
+                <DataGridTextColumn Header="Datum kupnje">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="DateOfPurchase" StringFormat="yyyy-MM-dd" />
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Ukupni trošak" Binding="{Binding Sum}" />
             </DataGrid.Columns>
         </DataGrid>

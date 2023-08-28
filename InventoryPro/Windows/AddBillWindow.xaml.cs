@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -47,7 +48,7 @@ namespace InventoryPro
                     {
                         if (item.Id == helpProduct.Id)
                         {
-                            items.Add(new Items { Amount = helpProduct.Amount, Product = item, Sum = helpProduct.Amount * item.PricePerUnit });
+                            items.Add(new Items { AmountBought = helpProduct.Amount, Product = item, Sum = helpProduct.Amount * item.PricePerUnit });
                         }
                     }
                 }
@@ -61,6 +62,13 @@ namespace InventoryPro
             }
             bill.Sum = total;
             bill.Items = items;
+            bill.Buyer = buyerText.Text;
+
+            DateTime? selectedDate = dateOfPurchaseText.SelectedDate;
+            if (selectedDate.HasValue)
+            {
+                bill.DateOfPurchase = selectedDate.Value.Date;
+            }
             mongoRepository.AddBill(bill);
             BillsWindow billWindow = new BillsWindow();
             billWindow.Show();
@@ -70,21 +78,22 @@ namespace InventoryPro
         private void dataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var selectedItem = dataGrid.SelectedItem as Product;
-            originalProducts.Remove(selectedItem);
-            dataGrid.ItemsSource = null;
-            dataGrid.ItemsSource = originalProducts;
-            selectedProducts.Add(selectedItem);
-            dataGrid2.ItemsSource = null;
-            dataGrid2.ItemsSource = selectedProducts;
+            if (selectedItem is not null)
+            {
+                originalProducts.Remove(selectedItem);
+                dataGrid.ItemsSource = null;
+                dataGrid.ItemsSource = originalProducts;
+                selectedProducts.Add(selectedItem);
+                dataGrid2.ItemsSource = null;
+                dataGrid2.ItemsSource = selectedProducts;
 
-            dataGrid.Columns[0].Visibility = Visibility.Collapsed;
-            dataGrid.Columns[2].Visibility = Visibility.Collapsed;
-            dataGrid.Columns[3].Visibility = Visibility.Collapsed;
-            dataGrid2.Columns[1].Visibility = Visibility.Collapsed;
-            dataGrid2.Columns[3].Visibility = Visibility.Collapsed;
-            dataGrid2.Columns[4].Visibility = Visibility.Collapsed;
-
-
+                dataGrid.Columns[0].Visibility = Visibility.Collapsed;
+                dataGrid.Columns[2].Visibility = Visibility.Collapsed;
+                dataGrid.Columns[3].Visibility = Visibility.Collapsed;
+                dataGrid2.Columns[1].Visibility = Visibility.Collapsed;
+                dataGrid2.Columns[3].Visibility = Visibility.Collapsed;
+                dataGrid2.Columns[4].Visibility = Visibility.Collapsed;
+            }
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
@@ -92,6 +101,29 @@ namespace InventoryPro
             BillsWindow billsWindow = new BillsWindow();
             billsWindow.Show();
             this.Close();   
+        }
+
+        private void dataGrid2_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var selectedItem = dataGrid2.SelectedItem as Product;
+            if (selectedItem is not null)
+            {
+                selectedProducts.Remove(selectedItem);
+                dataGrid2.ItemsSource = null;
+                dataGrid2.ItemsSource = selectedProducts;
+                originalProducts.Add(selectedItem);
+                dataGrid.ItemsSource = null;
+                dataGrid.ItemsSource = originalProducts;
+
+                dataGrid.Columns[0].Visibility = Visibility.Collapsed;
+                dataGrid.Columns[2].Visibility = Visibility.Collapsed;
+                dataGrid.Columns[3].Visibility = Visibility.Collapsed;
+                dataGrid2.Columns[1].Visibility = Visibility.Collapsed;
+                dataGrid2.Columns[3].Visibility = Visibility.Collapsed;
+                dataGrid2.Columns[4].Visibility = Visibility.Collapsed;
+
+            }
+
         }
     }
 }
