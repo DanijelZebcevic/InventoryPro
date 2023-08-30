@@ -211,5 +211,48 @@ namespace InventoryPro
                     updateDefinition);
         }
 
+        public async void AddOrder(Order order)
+        {
+            var collection = database.GetCollection<Order>("orders");
+            await collection.InsertOneAsync(order);
+
+        }
+
+        public async Task<List<Order>> GetOrders()
+        {
+            List<Order> orders = new List<Order>();
+            var collection = database.GetCollection<Order>("orders");
+            var results = await collection.FindAsync(_ => true);
+
+            foreach (var bill in results.ToList())
+            {
+                orders.Add(bill);
+            }
+            return orders;
+        }
+
+        public async void UpdateOrder(Order oldOrder, Order newOrder)
+        {
+            var collection = database.GetCollection<Order>("orders");
+
+            var updateDefinition = Builders<Order>.Update
+                .Set(or => or.OrderIsDelivered, newOrder.OrderIsDelivered)
+                .Set(or => or.OrderedItems, newOrder.OrderedItems)
+                .Set(or => or.Customer, newOrder.Customer)
+                .Set(or => or.DeliveryDate, newOrder.DeliveryDate);
+
+
+            var updateResult = await collection.UpdateOneAsync(
+                    or => or.Id == oldOrder.Id,
+                    updateDefinition);
+        }
+
+        public async void DeleteOrder(Order order)
+        {
+            var collection = database.GetCollection<Order>("orders");
+            var filter = Builders<Order>.Filter.Eq(o => o.Id, order.Id);
+            collection.DeleteOne(filter);
+        }
+
     }
 }

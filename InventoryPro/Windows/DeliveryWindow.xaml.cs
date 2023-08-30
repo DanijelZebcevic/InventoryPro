@@ -23,5 +23,30 @@ namespace InventoryPro.Windows
         {
             InitializeComponent();
         }
+
+        private void homeButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void inventoryButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void billButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void orderButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void contactButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

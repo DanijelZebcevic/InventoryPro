@@ -96,6 +96,22 @@
             </Setter>
         </Style>
 
+        <Style x:Key="CustomDataGridStyle" TargetType="DataGrid">
+            <Setter Property="AutoGenerateColumns" Value="True" />
+            <Setter Property="AlternatingRowBackground" Value="#F0F0F0" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="RowHeaderWidth" Value="0" />
+            <Setter Property="BorderBrush" Value="#CCCCCC" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="ColumnHeaderHeight" Value="30" />
+            <Setter Property="RowHeight" Value="30" />
+            <Setter Property="HorizontalGridLinesBrush" Value="#CCCCCC" />
+            <Setter Property="VerticalGridLinesBrush" Value="#CCCCCC" />
+            <Setter Property="HeadersVisibility" Value="Column" />
+            <Setter Property="SelectionMode" Value="Single" />
+            <Setter Property="CanUserAddRows" Value="False" />
+        </Style>
+
 
     </Application.Resources>
 </Application>

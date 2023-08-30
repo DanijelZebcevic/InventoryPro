@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InventoryPro.Windows"
         mc:Ignorable="d"
-        Title="UpdateContactWindow" Height="295" Width="800" Loaded="Window_Loaded">
+        Title="UpdateContactWindow" WindowStartupLocation="CenterScreen" Height="295" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />

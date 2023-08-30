@@ -89,9 +89,14 @@ namespace InventoryPro
 
         private void dataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            EditBillWindow editBillWindow = new EditBillWindow(dataGrid.SelectedItem as Bill);
-            editBillWindow.Show();
-            this.Close();
+            var selectedBill = dataGrid.SelectedItem as Bill;
+            if (selectedBill != null)
+            {
+                EditBillWindow editBillWindow = new EditBillWindow(dataGrid.SelectedItem as Bill);
+                editBillWindow.Show();
+                this.Close();
+            }
+            
         }
     }
 }

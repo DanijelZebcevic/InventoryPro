@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InventoryPro"
         mc:Ignorable="d"
-        Title="RegistrationWindow" Height="450" Width="509">
+        Title="RegistrationWindow" WindowStartupLocation="CenterScreen" Height="450" Width="509">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />

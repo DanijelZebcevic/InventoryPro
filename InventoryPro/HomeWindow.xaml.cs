@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InventoryPro.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,6 +50,20 @@ namespace InventoryPro
         {
             ContactsWindow contactsWindow = new ContactsWindow();
             contactsWindow.Show();
+            this.Close();
+        }
+
+        private void deliveryButton_Click(object sender, RoutedEventArgs e)
+        {
+            DeliveryWindow deliveryWindow = new DeliveryWindow();
+            deliveryWindow.Show();
+            this.Close();
+        }
+
+        private void orderButton_Click(object sender, RoutedEventArgs e)
+        {
+            OrderWindow orderWindow = new OrderWindow();
+            orderWindow.Show();
             this.Close();
         }
     }
