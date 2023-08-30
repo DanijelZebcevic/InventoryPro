@@ -12,6 +12,7 @@ using System.Xml.Linq;
 using System.Net.Mail;
 using System.Net;
 using System.Linq;
+using System.Windows.Controls;
 
 namespace InventoryPro
 {
@@ -224,9 +225,9 @@ namespace InventoryPro
             var collection = database.GetCollection<Order>("orders");
             var results = await collection.FindAsync(_ => true);
 
-            foreach (var bill in results.ToList())
+            foreach (var ord in results.ToList())
             {
-                orders.Add(bill);
+                orders.Add(ord);
             }
             return orders;
         }
@@ -254,5 +255,47 @@ namespace InventoryPro
             collection.DeleteOne(filter);
         }
 
+        public async void AddDelivery(Delivery delivery)
+        {
+            var collection = database.GetCollection<Delivery>("deliveries");
+            await collection.InsertOneAsync(delivery);
+        }
+
+        public async Task<List<Delivery>> GetDeliveries()
+        {
+            List<Delivery> deliveries = new List<Delivery>();
+            var collection = database.GetCollection<Delivery>("deliveries");
+            var results = await collection.FindAsync(_ => true);
+
+            foreach (var del in results.ToList())
+            {
+                deliveries.Add(del);
+            }
+            return deliveries;
+        }
+
+        public async void UpdateDelivery(Delivery oldDelivery, Delivery newDelivery)
+        {
+            var collection = database.GetCollection<Delivery>("deliveries");
+
+            var updateDefinition = Builders<Delivery>.Update
+                .Set(del => del.DeliveredItems, newDelivery.DeliveredItems)
+                .Set(del => del.Deliverer, newDelivery.Deliverer)
+                .Set(del => del.DeliveryDate, newDelivery.DeliveryDate)
+                .Set(del => del.OrderIsDelivered, newDelivery.OrderIsDelivered);
+
+
+
+            var updateResult = await collection.UpdateOneAsync(
+                    del => del.Id == oldDelivery.Id,
+                    updateDefinition);
+        }
+
+        public async void DeleteDelivery(Delivery delivery)
+        {
+            var collection = database.GetCollection<Delivery>("deliveries");
+            var filter = Builders<Delivery>.Filter.Eq(del => del.Id, delivery.Id);
+            collection.DeleteOne(filter);
+        }
     }
 }

@@ -6,26 +6,17 @@ using System.Windows.Controls;
 namespace InventoryPro.Windows
 {
     /// <summary>
-    /// Interaction logic for UpdateOrderWindow.xaml
+    /// Interaction logic for UpdateDeliveryWindow.xaml
     /// </summary>
-    public partial class UpdateOrderWindow : Window
+    public partial class UpdateDeliveryWindow : Window
     {
         private List<Product> originalProducts = new List<Product>();
         private List<Product> selectedProducts = new List<Product>();
-        private Order passedOrder;
-
-        public UpdateOrderWindow(Order order)
+        private Delivery passedDelivery;
+        public UpdateDeliveryWindow(Delivery delivery)
         {
-            passedOrder = order;
+            passedDelivery = delivery;
             InitializeComponent();
-        }
-
-    
-        private void backButton_Click(object sender, RoutedEventArgs e)
-        {
-            OrderWindow orderWindow = new OrderWindow();
-            orderWindow.Show();
-            this.Close();
         }
 
         private void toRightButton_Click(object sender, RoutedEventArgs e)
@@ -71,30 +62,6 @@ namespace InventoryPro.Windows
             }
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            customerText.Text = passedOrder.Customer;
-            orderDateText.SelectedDate = passedOrder.DeliveryDate;
-            for (int i = 0; i < passedOrder.OrderedItems.Count; i++)
-            {
-                var prod = passedOrder.OrderedItems[i].Product;
-                prod.Amount = passedOrder.OrderedItems[i].AmountBought;
-                selectedProducts.Add(prod);
-            }
-            MongoRepository mongoRepository = new MongoRepository();
-            originalProducts = await mongoRepository.GetProductsNotInList(selectedProducts);
-            dataGrid.ItemsSource = originalProducts;
-            dataGrid2.ItemsSource = selectedProducts;
-            dataGrid.Columns[2].Visibility = Visibility.Collapsed;
-            dataGrid.Columns[3].Visibility = Visibility.Collapsed;
-            dataGrid.Columns[4].Visibility = Visibility.Collapsed;
-            dataGrid.Columns[5].Visibility = Visibility.Collapsed;
-
-            dataGrid2.Columns[1].Visibility = Visibility.Collapsed;
-            dataGrid2.Columns[3].Visibility = Visibility.Collapsed;
-            dataGrid2.Columns[4].Visibility = Visibility.Collapsed;
-        }
-
         private async void editButton_Click(object sender, RoutedEventArgs e)
         {
             MongoRepository mongoRepository = new MongoRepository();
@@ -116,33 +83,64 @@ namespace InventoryPro.Windows
 
             }
 
-            Order order = new Order();
-            order.OrderedItems = items;
-            order.Customer = customerText.Text;
-            DateTime? selectedDate = orderDateText.SelectedDate;
+            Delivery delivery = new Delivery();
+            delivery.DeliveredItems = items;
+            delivery.Deliverer = delivererText.Text;
+            DateTime? selectedDate = deliveryDateText.SelectedDate;
             if (selectedDate.HasValue)
             {
-                order.DeliveryDate = selectedDate.Value.Date;
+                delivery.DeliveryDate = selectedDate.Value.Date;
             }
 
 
-            ComboBoxItem selectedComboBoxItem = (ComboBoxItem)delivered.Items[delivered.SelectedIndex];
+            ComboBoxItem selectedComboBoxItem = (ComboBoxItem)deliveredText.Items[deliveredText.SelectedIndex];
             string selectedContent = selectedComboBoxItem.Content.ToString();
 
             if (selectedContent == "Dostavljeno")
             {
-                order.OrderIsDelivered = true;
+                delivery.OrderIsDelivered = true;
             }
             else
             {
-                order.OrderIsDelivered = false;
+                delivery.OrderIsDelivered = false;
             }
 
-            mongoRepository.UpdateOrder(passedOrder, order);
-            OrderWindow orderWindow = new OrderWindow();
-            orderWindow.Show();
+            mongoRepository.UpdateDelivery(passedDelivery, delivery);
+            DeliveryWindow deliveryWindow = new DeliveryWindow();
+            deliveryWindow.Show();
             this.Close();
 
+        }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            DeliveryWindow deliveryWindow = new DeliveryWindow();
+            deliveryWindow.Show();
+            this.Close();
+        }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            delivererText.Text = passedDelivery.Deliverer;
+            deliveryDateText.SelectedDate = passedDelivery.DeliveryDate;
+            for (int i = 0; i < passedDelivery.DeliveredItems.Count; i++)
+            {
+                var prod = passedDelivery.DeliveredItems[i].Product;
+                prod.Amount = passedDelivery.DeliveredItems[i].AmountBought;
+                selectedProducts.Add(prod);
+            }
+            MongoRepository mongoRepository = new MongoRepository();
+            originalProducts = await mongoRepository.GetProductsNotInList(selectedProducts);
+            dataGrid.ItemsSource = originalProducts;
+            dataGrid2.ItemsSource = selectedProducts;
+            dataGrid.Columns[2].Visibility = Visibility.Collapsed;
+            dataGrid.Columns[3].Visibility = Visibility.Collapsed;
+            dataGrid.Columns[4].Visibility = Visibility.Collapsed;
+            dataGrid.Columns[5].Visibility = Visibility.Collapsed;
+
+            dataGrid2.Columns[1].Visibility = Visibility.Collapsed;
+            dataGrid2.Columns[3].Visibility = Visibility.Collapsed;
+            dataGrid2.Columns[4].Visibility = Visibility.Collapsed;
         }
     }
 }

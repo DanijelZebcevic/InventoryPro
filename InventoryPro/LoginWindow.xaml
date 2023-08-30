@@ -21,9 +21,10 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <TextBlock HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Text="Prijava" FontSize="28"/>
@@ -32,7 +33,7 @@
         <TextBlock Grid.Column="1" Grid.Row="4" Text="Lozinka" FontSize="20"/>
         <TextBox x:Name="passwordText" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Height="25" Margin="0, 10"/>
 
-        <Button x:Name="loginButton" Content="Prijava" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" MaxWidth="100" Margin="0, 10" FontSize="14" Click="loginButton_Click"/>
-        <Button x:Name="registrationButton" Content="Registracija" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" MaxWidth="100" Margin="0, 10" FontSize="14" Click="registrationButton_Click"/>
+        <Button Style="{StaticResource InfoButton}" x:Name="loginButton" Content="Prijava" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" MaxWidth="100"  FontSize="14" Click="loginButton_Click"/>
+        <Button Style="{StaticResource InfoButton}" x:Name="registrationButton" Content="Registracija" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" MaxWidth="100" FontSize="14" Click="registrationButton_Click"/>
     </Grid>
 </Window>

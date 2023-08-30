@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InventoryPro"
         mc:Ignorable="d"
-        Title="RegistrationWindow" WindowStartupLocation="CenterScreen" Height="450" Width="509">
+        Title="RegistrationWindow" WindowStartupLocation="CenterScreen" Height="470" Width="509">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
@@ -24,9 +24,10 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <TextBlock HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Text="Registracija" FontSize="28"/>
@@ -43,7 +44,7 @@
         <TextBlock Grid.Column="1" Grid.Row="8" Text="Ponovi lozinku" FontSize="20"/>
         <TextBox x:Name="password2Text" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" Height="25" Margin="0, 10"/>
 
-        <Button x:Name="registrationButton" Content="Registriraj" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" MaxWidth="100" Margin="0, 10" FontSize="16" Click="registrationButton_Click"/>
-        <Button x:Name="backButton" Content="Povratak" Grid.Column="1" Grid.Row="11" Grid.ColumnSpan="2" MaxWidth="100" Margin="0, 10" FontSize="16" Click="backButton_Click"/>
+        <Button x:Name="registrationButton" Style="{StaticResource InfoButton}" Content="Registriraj" Grid.Column="1" Grid.Row="10" Grid.ColumnSpan="2" MaxWidth="100" FontSize="16" Click="registrationButton_Click"/>
+        <Button x:Name="backButton" Style="{StaticResource InfoButton}" Content="Povratak" Grid.Column="1" Grid.Row="12" Grid.ColumnSpan="2" MaxWidth="100" FontSize="16" Click="backButton_Click"/>
     </Grid>
 </Window>

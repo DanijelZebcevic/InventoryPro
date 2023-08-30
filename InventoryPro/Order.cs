@@ -16,7 +16,7 @@ namespace InventoryPro
 
         public string Customer { get; set; }
 
-        public DateTime DeliveryDate { get; set; }
+        public DateTime? DeliveryDate { get; set; }
 
         public List<Items> OrderedItems { get; set; }
 

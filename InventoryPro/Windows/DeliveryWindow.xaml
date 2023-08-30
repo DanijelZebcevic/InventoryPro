@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InventoryPro.Windows"
         mc:Ignorable="d"
-        Title="DeliveryWindow" WindowStartupLocation="CenterScreen" Height="450" Width="800">
+        Title="DeliveryWindow" WindowStartupLocation="CenterScreen" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
@@ -30,13 +30,12 @@
         </Grid.RowDefinitions>
 
 
-        <DataGrid Name="dataGrid" Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="3" MinHeight="100" IsReadOnly="True" AutoGenerateColumns="False">
+        <DataGrid Name="dataGrid" Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="3" MinHeight="100" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="dataGrid_MouseDoubleClick" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Bill ID" Binding="{Binding Id}" />
                 <DataGridTemplateColumn Header="Proizvodi">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ItemsControl ItemsSource="{Binding Items}">
+                            <ItemsControl ItemsSource="{Binding DeliveredItems}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
@@ -49,17 +48,17 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Kupac" Binding="{Binding Buyer}" />
-                <DataGridTextColumn Header="Datum kupnje">
+                <DataGridTextColumn Header="Kupac" Binding="{Binding Deliverer}" />
+                <DataGridTextColumn Header="Datum dostave">
                     <DataGridTextColumn.Binding>
-                        <Binding Path="DateOfPurchase" StringFormat="yyyy-MM-dd" />
+                        <Binding Path="DeliveryDate" StringFormat="yyyy-MM-dd" />
                     </DataGridTextColumn.Binding>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Ukupni trošak" Binding="{Binding Sum}" />
+                <DataGridTextColumn Header="Dostavljeno" Binding="{Binding OrderIsDelivered}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Style="{StaticResource SuccessButton}" x:Name="addButton" Content="Dodaj" Grid.Column="2" Grid.Row="4"  Margin="0,15,0,0" />
-        <Button Style="{StaticResource DangerButton}" x:Name="deleteButton" Content="Obriši" Grid.Column="4" Grid.Row="4"  Margin="0,15,0,0"/>
+        <Button Style="{StaticResource SuccessButton}" x:Name="addButton" Content="Dodaj" Grid.Column="2" Grid.Row="4"  Margin="0,15,0,0" Click="addButton_Click" />
+        <Button Style="{StaticResource DangerButton}" x:Name="deleteButton" Content="Obriši" Grid.Column="4" Grid.Row="4"  Margin="0,15,0,0" Click="deleteButton_Click"/>
 
         <Border Grid.Row="1" Width="70" Grid.RowSpan="6" Background="#623ed0" CornerRadius="0 10 0 0">
         </Border>
