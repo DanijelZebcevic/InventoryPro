@@ -17,6 +17,8 @@ namespace InventoryPro
 
         public string Buyer { get; set; }
 
+        public bool IsPaid { get; set; }
+
         public DateTime DateOfPurchase { get; set; }
 
         public float Sum { get; set; }

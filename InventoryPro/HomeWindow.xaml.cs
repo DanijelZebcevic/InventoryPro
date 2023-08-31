@@ -1,17 +1,7 @@
 ﻿using InventoryPro.Windows;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace InventoryPro
 {
@@ -28,7 +18,25 @@ namespace InventoryPro
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
            
-            
+            MongoRepository mongoRepository = new MongoRepository();
+            List<Bill> bills = await mongoRepository.GetPaidBills();
+            paidBillsNumberText.Text = bills.Count.ToString();
+            List<Product> products = await mongoRepository.GetAvailableProducts();
+            productsNumberText.Text = products.Count.ToString();
+            int numOfOrderedDeliveries = await mongoRepository.GetNumberOfOrderedDeliveries();
+            int numOfIncomingDeliveries = await mongoRepository.GetNumberOfIncomingDeliveries();
+            float totalSum = await mongoRepository.GetSumOfDeliveriesCost();
+            orderedDeliveriesText.Text = "Dostavljene dostave: " + numOfOrderedDeliveries.ToString();
+            incomingDeliveriesText.Text = "Nadolazeće dostave: " + numOfIncomingDeliveries.ToString();
+            deliveriesCostSumText.Text = "Ukupni trošak: " + totalSum.ToString() + " €";
+
+            int numOfOrderedOrders = await mongoRepository.GetNumberOfOrderedOrders();
+            int numOfIncomingOrders = await mongoRepository.GetNumberOfIncomingOrders();
+            float totalSum2 = await mongoRepository.GetSumOfOrdersCost();
+            orderedOrdersText.Text = "Dostavljene narudžbe: " + numOfOrderedOrders.ToString();
+            incomingOrdersText.Text = "Nadolazeće narudžbe: " + numOfIncomingOrders.ToString();
+            ordersCostSumText.Text = "Ukupni trošak: " + totalSum2.ToString() + " €";
+
         }
 
         private void homeButton_Click(object sender, RoutedEventArgs e)

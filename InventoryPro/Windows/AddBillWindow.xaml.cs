@@ -64,6 +64,18 @@ namespace InventoryPro
             bill.Items = items;
             bill.Buyer = buyerText.Text;
 
+            ComboBoxItem selectedComboBoxItem = (ComboBoxItem)billIsPaidText.Items[billIsPaidText.SelectedIndex];
+            string selectedContent = selectedComboBoxItem.Content.ToString();
+
+            if (selectedContent == "Da")
+            {
+                bill.IsPaid = true;
+            }
+            else
+            {
+                bill.IsPaid = false;
+            }
+
             DateTime? selectedDate = dateOfPurchaseText.SelectedDate;
             if (selectedDate.HasValue)
             {

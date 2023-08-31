@@ -32,6 +32,15 @@ namespace InventoryPro.Windows
         {
             buyerText.Text = passedBill.Buyer;
             dateOfPurchaseText.SelectedDate = passedBill.DateOfPurchase;
+
+            if (passedBill.IsPaid == true)
+            {
+                billIsPaidText.SelectedIndex = 0;
+            }
+            else
+            {
+                billIsPaidText.SelectedIndex = 1;
+            }
             
           
             for (int i = 0; i < passedBill.Items.Count(); i++)
@@ -125,6 +134,18 @@ namespace InventoryPro.Windows
             bill.Sum = total;
             bill.Items = items;
             bill.Buyer = buyerText.Text;
+
+            ComboBoxItem selectedComboBoxItem = (ComboBoxItem)billIsPaidText.Items[billIsPaidText.SelectedIndex];
+            string selectedContent = selectedComboBoxItem.Content.ToString();
+
+            if (selectedContent == "Da")
+            {
+                bill.IsPaid = true;
+            }
+            else
+            {
+                bill.IsPaid = false;
+            }
 
             DateTime? selectedDate = dateOfPurchaseText.SelectedDate;
             if (selectedDate.HasValue)

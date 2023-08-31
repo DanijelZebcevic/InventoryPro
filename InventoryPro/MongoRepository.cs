@@ -1,18 +1,7 @@
 ﻿using MongoDB.Driver;
-using BCrypt.Net;
-using System.Windows;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Windows.Documents;
-using System;
-using System.Collections;
-using static MongoDB.Driver.WriteConcern;
-using System.Diagnostics;
-using System.Xml.Linq;
-using System.Net.Mail;
-using System.Net;
 using System.Linq;
-using System.Windows.Controls;
 
 namespace InventoryPro
 {
@@ -114,15 +103,33 @@ namespace InventoryPro
         {
 
             IMongoCollection<Product> productsCollection = database.GetCollection<Product>("products");
-
             List<string> selectedProductNames = passedList.Select(p => p.Name).ToList();
             var filter = Builders<Product>.Filter.Not(
                     Builders<Product>.Filter.Where(p => selectedProductNames.Contains(p.Name)));
             var prodsNotInlist=productsCollection.Find(filter).ToList();
             return prodsNotInlist;
 
+        }
+
+        public async Task<List<Product>> GetAvailableProducts()
+        {
+            var collection = database.GetCollection<Product>("products");
+            var results = await collection.FindAsync(_ => true);
+            List<Product> all = new List<Product>();
+
+            foreach (var item in results.ToList())
+            {
+                if (item.Amount > 0)
+                {
+                    all.Add(item);
+                }
+            }
+
+            return all;
 
         }
+
+
 
         public async Task<List<Contact>> GetContacts()
         {
@@ -189,6 +196,19 @@ namespace InventoryPro
             return bills;
         }
 
+        public async Task<List<Bill>> GetPaidBills()
+        {
+            List<Bill> paidBills = new List<Bill>();
+            var collection = database.GetCollection<Bill>("bills");
+            var filter = Builders<Bill>.Filter.Eq(bill => bill.IsPaid, true);
+
+            var results = await collection.FindAsync(filter);
+
+            await results.ForEachAsync(bill => paidBills.Add(bill));
+
+            return paidBills;
+        }
+
         public async void DeleteBill(Bill bill)
         {
             var id = bill.Id;
@@ -205,6 +225,7 @@ namespace InventoryPro
                 .Set(b => b.Buyer, newBill.Buyer)
                 .Set(b => b.DateOfPurchase, newBill.DateOfPurchase)
                 .Set(b => b.Items, newBill.Items)
+                .Set(b => b.IsPaid, newBill.IsPaid)
                 .Set(b => b.Sum, newBill.Sum);
 
             var updateResult = await collection.UpdateOneAsync(
@@ -255,6 +276,50 @@ namespace InventoryPro
             collection.DeleteOne(filter);
         }
 
+        public async Task<int> GetNumberOfOrderedOrders()
+        {
+            List<Order> orders = new List<Order>();
+            var collection = database.GetCollection<Order>("orders");
+            var filter = Builders<Order>.Filter.Eq(del => del.OrderIsDelivered, true);
+
+            var results = await collection.FindAsync(filter);
+
+            await results.ForEachAsync(bill => orders.Add(bill));
+
+            return orders.Count;
+        }
+
+        public async Task<int> GetNumberOfIncomingOrders()
+        {
+            List<Order> orders = new List<Order>();
+            var collection = database.GetCollection<Order>("orders");
+            var filter = Builders<Order>.Filter.Eq(del => del.OrderIsDelivered, false);
+
+            var results = await collection.FindAsync(filter);
+
+            await results.ForEachAsync(bill => orders.Add(bill));
+
+            return orders.Count;
+        }
+
+        public async Task<float> GetSumOfOrdersCost()
+        {
+            var collection = database.GetCollection<Order>("orders");
+            var results = await collection.FindAsync(_ => true);
+            float sum = 0;
+
+            foreach (var del in results.ToList())
+            {
+                foreach (var item in del.OrderedItems)
+                {
+                    sum += item.Sum;
+                }
+            }
+
+            return sum;
+        }
+
+
         public async void AddDelivery(Delivery delivery)
         {
             var collection = database.GetCollection<Delivery>("deliveries");
@@ -273,6 +338,50 @@ namespace InventoryPro
             }
             return deliveries;
         }
+
+        public async Task<int> GetNumberOfOrderedDeliveries()
+        {
+            List<Delivery> deliveries = new List<Delivery>();
+            var collection = database.GetCollection<Delivery>("deliveries");
+            var filter = Builders<Delivery>.Filter.Eq(del => del.OrderIsDelivered, true);
+
+            var results = await collection.FindAsync(filter);
+
+            await results.ForEachAsync(bill => deliveries.Add(bill));
+
+            return deliveries.Count;
+        }
+
+        public async Task<int> GetNumberOfIncomingDeliveries()
+        {
+            List<Delivery> deliveries = new List<Delivery>();
+            var collection = database.GetCollection<Delivery>("deliveries");
+            var filter = Builders<Delivery>.Filter.Eq(del => del.OrderIsDelivered, false);
+
+            var results = await collection.FindAsync(filter);
+
+            await results.ForEachAsync(bill => deliveries.Add(bill));
+
+            return deliveries.Count;
+        }
+
+        public async Task<float> GetSumOfDeliveriesCost()
+        {
+            var collection = database.GetCollection<Delivery>("deliveries");
+            var results = await collection.FindAsync(_ => true);
+            float sum = 0;
+
+            foreach (var del in results.ToList())
+            {
+                foreach (var item in del.DeliveredItems)
+                {
+                    sum += item.Sum;
+                }
+            }
+
+            return sum;
+        }
+
 
         public async void UpdateDelivery(Delivery oldDelivery, Delivery newDelivery)
         {

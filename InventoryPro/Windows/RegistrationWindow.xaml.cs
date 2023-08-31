@@ -20,12 +20,25 @@ namespace InventoryPro
         {
          
             MongoRepository repository = new MongoRepository();
-            repository.AddUser(usernameText.Text, emailText.Text, passwordText.Text);
-
-
-            LoginWindow newWindow = new LoginWindow();
-            newWindow.Show();
-            this.Close();
+            if (usernameText.Text != "" && emailText.Text != "" & passwordText.Text != "")
+            {
+                if (passwordText.Text == password2Text.Text)
+                {
+                    repository.AddUser(usernameText.Text, emailText.Text, passwordText.Text);
+                    LoginWindow newWindow = new LoginWindow();
+                    newWindow.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Lozinke moraju biti iste!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Niste upisali sve podatke!");
+            }
+       
 
         }
 

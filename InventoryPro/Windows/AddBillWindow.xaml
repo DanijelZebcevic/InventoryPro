@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InventoryPro"
         mc:Ignorable="d"
-        Title="AddBillWindow"  WindowStartupLocation="CenterScreen" Height="420" Width="500" Loaded="Window_Loaded">
+        Title="AddBillWindow"  WindowStartupLocation="CenterScreen" Height="460" Width="500" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />     
@@ -18,6 +18,8 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -41,11 +43,18 @@
         <TextBlock Grid.Column="1" Grid.Row="3" Text="Ime kupca" FontSize="20"/>
         <TextBox x:Name="buyerText" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Height="25" Margin="0, 10"/>
 
-        <TextBlock Text="Datum kupovine" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" FontSize="20" />
-        <DatePicker x:Name="dateOfPurchaseText" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" Margin="0, 10"/>
+        <TextBlock Text="Račun je plaćen" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="5" FontSize="20" />
+        <ComboBox x:Name="billIsPaidText" Grid.Column="1" Grid.Row="6" SelectedIndex="0" Margin="0, 10">
+            <ComboBoxItem Content="Da" />
+            <ComboBoxItem Content="Ne" />
+        </ComboBox>
 
 
-        <Button Style="{StaticResource SuccessButton}" x:Name="addButton" Content="Dodaj" Grid.Column="1" Grid.Row="8" Click="addButton_Click" Margin="15,0,15,10" />
-        <Button Style="{StaticResource DangerButton}" x:Name="backButton" Content="Odustani" Grid.Column="2" Grid.Row="8" Margin="15,0,15,10" Click="backButton_Click" />
+        <TextBlock Text="Datum kupovine" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" FontSize="20" />
+        <DatePicker x:Name="dateOfPurchaseText" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" Margin="0, 10"/>
+
+
+        <Button Style="{StaticResource SuccessButton}" x:Name="addButton" Content="Dodaj" Grid.Column="1" Grid.Row="10" Click="addButton_Click" Margin="15,0,15,10" />
+        <Button Style="{StaticResource DangerButton}" x:Name="backButton" Content="Odustani" Grid.Column="2" Grid.Row="10" Margin="15,0,15,10" Click="backButton_Click" />
     </Grid>
 </Window>

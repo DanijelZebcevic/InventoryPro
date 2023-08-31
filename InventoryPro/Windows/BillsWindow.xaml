@@ -50,6 +50,7 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Kupac" Binding="{Binding Buyer}" />
+                <DataGridTextColumn Header="Plaćeno" Binding="{Binding IsPaid}" />
                 <DataGridTextColumn Header="Datum kupnje">
                     <DataGridTextColumn.Binding>
                         <Binding Path="DateOfPurchase" StringFormat="yyyy-MM-dd" />
