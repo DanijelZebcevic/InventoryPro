@@ -15,20 +15,28 @@ namespace InventoryPro
 
         private async void loginButton_Click(object sender, RoutedEventArgs e)
         {
-               MongoRepository repository = new MongoRepository();
-               bool passwordIsCorrect = await repository.LoginUser(passwordText.Text, usernameText.Text);
+            MongoRepository repository = new MongoRepository();
+            bool passwordIsCorrect = false;
 
-               if (passwordIsCorrect)
-               {
-                   HomeWindow homeWindow = new HomeWindow();
-                   homeWindow.Show();
-                   this.Close();
-               }
-               else
-               {
-                   MessageBox.Show("Netočni podaci tijekom prijave!");
+            if (usernameText.Text != "" && passwordText.Text != "")
+            {
+                passwordIsCorrect = await repository.LoginUser(passwordText.Text, usernameText.Text);
+                if (passwordIsCorrect)
+                {
+                    HomeWindow homeWindow = new HomeWindow();
+                    homeWindow.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Netočni podaci tijekom prijave!");
 
-               }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Niste upisali sve podatke!");
+            }
 
         }
 

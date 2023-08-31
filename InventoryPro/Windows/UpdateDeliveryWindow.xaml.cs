@@ -123,11 +123,21 @@ namespace InventoryPro.Windows
         {
             delivererText.Text = passedDelivery.Deliverer;
             deliveryDateText.SelectedDate = passedDelivery.DeliveryDate;
+
             for (int i = 0; i < passedDelivery.DeliveredItems.Count; i++)
             {
                 var prod = passedDelivery.DeliveredItems[i].Product;
                 prod.Amount = passedDelivery.DeliveredItems[i].AmountBought;
                 selectedProducts.Add(prod);
+            }
+
+            if (passedDelivery.OrderIsDelivered == true)
+            {
+                deliveredText.SelectedIndex = 0;
+            }
+            else
+            {
+                deliveredText.SelectedIndex = 1;
             }
             MongoRepository mongoRepository = new MongoRepository();
             originalProducts = await mongoRepository.GetProductsNotInList(selectedProducts);

@@ -81,6 +81,16 @@ namespace InventoryPro.Windows
                 prod.Amount = passedOrder.OrderedItems[i].AmountBought;
                 selectedProducts.Add(prod);
             }
+
+            if (passedOrder.OrderIsDelivered == true)
+            {
+                delivered.SelectedIndex = 0;
+            }
+            else
+            {
+                delivered.SelectedIndex = 1;
+            }
+
             MongoRepository mongoRepository = new MongoRepository();
             originalProducts = await mongoRepository.GetProductsNotInList(selectedProducts);
             dataGrid.ItemsSource = originalProducts;
