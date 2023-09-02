@@ -27,7 +27,6 @@ namespace InventoryPro
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            MongoRepository mongoRepository = new MongoRepository();
             RefreshData();
         }
 
@@ -43,8 +42,11 @@ namespace InventoryPro
         {
             var selected = dataGrid.SelectedItem as Product;
             MongoRepository mongoRepository = new MongoRepository();
-            mongoRepository.DeleteProduct(selected);
-            RefreshData();
+            if (selected != null)
+            {
+                mongoRepository.DeleteProduct(selected);
+                RefreshData();
+            }            
         }
 
         private async void RefreshData()
