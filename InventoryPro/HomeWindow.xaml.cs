@@ -23,14 +23,14 @@ namespace InventoryPro
             paidBillsNumberText.Text = bills.Count.ToString();
             List<Product> products = await mongoRepository.GetAvailableProducts();
             productsNumberText.Text = products.Count.ToString();
-            int numOfOrderedDeliveries = await mongoRepository.GetNumberOfOrderedDeliveries();
+            int numOfOrderedDeliveries = await mongoRepository.GetNumberOfDeliveredDeliveries();
             int numOfIncomingDeliveries = await mongoRepository.GetNumberOfIncomingDeliveries();
             float totalSum = await mongoRepository.GetSumOfDeliveriesCost();
             orderedDeliveriesText.Text = "Dostavljene dostave: " + numOfOrderedDeliveries.ToString();
             incomingDeliveriesText.Text = "Nadolazeće dostave: " + numOfIncomingDeliveries.ToString();
             deliveriesCostSumText.Text = "Ukupni trošak: " + totalSum.ToString() + " €";
 
-            int numOfOrderedOrders = await mongoRepository.GetNumberOfOrderedOrders();
+            int numOfOrderedOrders = await mongoRepository.GetNumberOfDeliveredOrders();
             int numOfIncomingOrders = await mongoRepository.GetNumberOfIncomingOrders();
             float totalSum2 = await mongoRepository.GetSumOfOrdersCost();
             orderedOrdersText.Text = "Dostavljene narudžbe: " + numOfOrderedOrders.ToString();

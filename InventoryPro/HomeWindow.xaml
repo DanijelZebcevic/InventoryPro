@@ -10,17 +10,13 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="30" />
-
             <ColumnDefinition Width="160" />
             <ColumnDefinition Width="50" />
             <ColumnDefinition Width="160" />
             <ColumnDefinition Width="*" />
-
         </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="15"/>
-
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -40,43 +36,33 @@
         <Button Style="{StaticResource menuButton}" x:Name="orderButton" Content="Narudžba" Grid.Column="0" Grid.Row="4"  MaxWidth="100" Margin="0, 10" FontSize="14" Click="orderButton_Click"/>
         <Button Style="{StaticResource menuButton}" x:Name="contactButton" Content="Kontakti" Grid.Column="0" Grid.Row="5"  MaxWidth="100" Margin="0, 10" FontSize="14" Click="contactButton_Click"/>
 
-
-        <Border Grid.Column="2" Grid.Row="2" Grid.RowSpan="2"  Style="{StaticResource MaterialCardStyle}" Margin="0,-20,0,20">
+        <Border Grid.Column="2" Grid.Row="2" Grid.RowSpan="2"  Style="{StaticResource CardStyle}" Margin="0,-20,0,20">
             <StackPanel>
                 <TextBlock Text="Plaćeni računi" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <TextBlock x:Name="paidBillsNumberText" FontSize="20" TextAlignment="Center"  Margin="0,20,0,0"/>
             </StackPanel>
         </Border>
-
-        <Border Grid.Column="4" Grid.Row="2" Grid.RowSpan="2"  Style="{StaticResource MaterialCardStyle}" Margin="0,-20,-25,20" >
+        <Border Grid.Column="4" Grid.Row="2" Grid.RowSpan="2"  Style="{StaticResource CardStyle}" Margin="0,-20,-25,20" >
             <StackPanel>
                 <TextBlock Text="Dostupni proizvodi" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <TextBlock x:Name="productsNumberText" FontSize="20" TextAlignment="Center" Margin="0,20,0,0" />
             </StackPanel>
         </Border>
-
-
-        <Border Grid.Column="2" Grid.Row="4" Grid.RowSpan="2"  Style="{StaticResource MaterialCardStyle}" Margin="0,0,-20,0">
+        <Border Grid.Column="2" Grid.Row="4" Grid.RowSpan="2"  Style="{StaticResource CardStyle}" Margin="0,0,-20,0">
             <StackPanel>
                 <TextBlock Text="Dostave" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <TextBlock FontSize="14" x:Name="orderedDeliveriesText" Margin="0,20,0,0"/>
                 <TextBlock FontSize="14" x:Name="incomingDeliveriesText" Margin="0,5,0,0"  />
                 <TextBlock FontSize="14" x:Name="deliveriesCostSumText" Margin="0,5,0,0"  />
-
-
             </StackPanel>
         </Border>
-
-        <Border Grid.Column="4" Grid.Row="4" Grid.RowSpan="2"  Style="{StaticResource MaterialCardStyle}" Margin="0,0,-30,0">
+        <Border Grid.Column="4" Grid.Row="4" Grid.RowSpan="2"  Style="{StaticResource CardStyle}" Margin="0,0,-30,0">
             <StackPanel>
                 <TextBlock Text="Narudžbe" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 <TextBlock FontSize="14" x:Name="orderedOrdersText" Margin="0,20,0,0"/>
                 <TextBlock FontSize="14" x:Name="incomingOrdersText" Margin="0,5,0,0"  />
                 <TextBlock FontSize="14" x:Name="ordersCostSumText" Margin="0,5,0,0"  />
-
-
             </StackPanel>
         </Border>
-
     </Grid>
 </Window>

@@ -35,7 +35,6 @@
         <Border Grid.Row="1" Width="70" Grid.RowSpan="6" Background="#623ed0" CornerRadius="0 10 0 0">
         </Border>
 
-
         <Button Style="{StaticResource menuButton}" x:Name="homeButton" Content="Početni" Grid.Column="0" Grid.Row="1"  MaxWidth="100" Margin="0, 10" FontSize="14" Click="homeButton_Click" />
         <Button Style="{StaticResource menuButton}" x:Name="billButton" Content="Računi" Grid.Column="0" Grid.Row="2"  MaxWidth="100" Margin="0, 10" FontSize="14" Click="billButton_Click" />
         <Button Style="{StaticResource menuButton}" x:Name="deliveryButton" Content="Dostava" Grid.Column="0" Grid.Row="3"  MaxWidth="100" Margin="0, 10" FontSize="14" Click="deliveryButton_Click" />

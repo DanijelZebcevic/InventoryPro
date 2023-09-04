@@ -144,7 +144,7 @@
             </Setter>
         </Style>
 
-        <Style TargetType="Border" x:Key="MaterialCardStyle">
+        <Style TargetType="Border" x:Key="CardStyle">
             <Setter Property="Background" Value="White"/>
             <Setter Property="BorderBrush" Value="LightGray"/>
             <Setter Property="BorderThickness" Value="1"/>

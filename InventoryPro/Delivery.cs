@@ -19,6 +19,6 @@ namespace InventoryPro
         public List<Items> DeliveredItems { get; set; }
 
         public bool OrderIsDelivered { get; set; }
-
+        
     }
 }

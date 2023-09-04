@@ -5,17 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InventoryPro"
         mc:Ignorable="d"
-        Title="AddBillWindow"  WindowStartupLocation="CenterScreen" Height="460" Width="500" Loaded="Window_Loaded">
+        Title="AddBillWindow"  WindowStartupLocation="CenterScreen" Height="490" Width="500" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50" />     
+            <ColumnDefinition Width="50" />
             <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="20" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="20" />
             <ColumnDefinition Width="150" />
             <ColumnDefinition Width="50" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
@@ -29,32 +32,38 @@
             <RowDefinition Height="50"/>
 
         </Grid.RowDefinitions>
-        <DataGrid Name="dataGrid" Grid.Column="1" Grid.Row="1" MinHeight="100" AutoGenerateColumns="True" MouseDoubleClick="dataGrid_MouseDoubleClick">
+        <DataGrid Name="dataGrid" Grid.Column="1" Grid.Row="2" MinHeight="100" AutoGenerateColumns="True" MouseDoubleClick="dataGrid_MouseDoubleClick">
            
         </DataGrid>
 
-        <DataGrid Name="dataGrid2" Grid.Column="3" Grid.Row="1" MinHeight="100" AutoGenerateColumns="True" MouseDoubleClick="dataGrid2_MouseDoubleClick">
+        <TextBlock Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" Text="Odaberi proizvode" FontSize="20"/>
+
+        <DataGrid Name="dataGrid2" Grid.Column="5" Grid.Row="2" MinHeight="100" AutoGenerateColumns="True" MouseDoubleClick="dataGrid2_MouseDoubleClick">
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="Kolicina" Binding="{Binding Amount}" />
             </DataGrid.Columns>
         </DataGrid>
 
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Ime kupca" FontSize="20"/>
-        <TextBox x:Name="buyerText" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Height="25" Margin="0, 10"/>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="Ime kupca" FontSize="20"/>
+        <TextBox x:Name="buyerText" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" Height="25" Margin="0, 10"/>
 
-        <TextBlock Text="Račun je plaćen" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="5" FontSize="20" />
-        <ComboBox x:Name="billIsPaidText" Grid.Column="1" Grid.Row="6" SelectedIndex="0" Margin="0, 10">
+        <TextBlock Text="Račun je plaćen" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="6" FontSize="20" />
+        <ComboBox x:Name="billIsPaidText" Grid.Column="1" Grid.Row="7" SelectedIndex="0" Margin="0, 10">
             <ComboBoxItem Content="Da" />
             <ComboBoxItem Content="Ne" />
         </ComboBox>
 
 
-        <TextBlock Text="Datum kupovine" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" FontSize="20" />
-        <DatePicker x:Name="dateOfPurchaseText" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" Margin="0, 10"/>
+        <TextBlock Text="Datum kupovine" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="3" FontSize="20" />
+        <DatePicker x:Name="dateOfPurchaseText" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="3" Margin="0, 10"/>
 
 
-        <Button Style="{StaticResource SuccessButton}" x:Name="addButton" Content="Dodaj" Grid.Column="1" Grid.Row="10" Click="addButton_Click" Margin="15,0,15,10" />
-        <Button Style="{StaticResource DangerButton}" x:Name="backButton" Content="Odustani" Grid.Column="2" Grid.Row="10" Margin="15,0,15,10" Click="backButton_Click" />
+
+        <Button  x:Name="toRightButton" Grid.Column="3" Grid.Row="2" Content=">>" FontSize="14" Margin="10,10,10,60" Click="toRightButton_Click"/>
+        <Button  x:Name="toLeftButton" Grid.Column="3" Grid.Row="2" Content="&lt;&lt;" FontSize="14" Margin="10,60,10,10" Click="toLeftButton_Click" />
+
+        <Button Style="{StaticResource SuccessButton}" x:Name="addButton" Content="Dodaj" Grid.Column="1" Grid.Row="11" Click="addButton_Click" Margin="15,0,15,10" />
+        <Button Style="{StaticResource DangerButton}" x:Name="backButton" Content="Odustani" Grid.Column="3" Grid.Row="11" Margin="5,0,5,10" Click="backButton_Click" />
     </Grid>
 </Window>

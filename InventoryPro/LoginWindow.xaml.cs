@@ -21,7 +21,7 @@ namespace InventoryPro
             if (usernameText.Text != "" && passwordText.Text != "")
             {
                 passwordIsCorrect = await repository.LoginUser(passwordText.Text, usernameText.Text);
-                if (passwordIsCorrect)
+                if (passwordIsCorrect == true)
                 {
                     HomeWindow homeWindow = new HomeWindow();
                     homeWindow.Show();

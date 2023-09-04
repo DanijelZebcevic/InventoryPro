@@ -89,23 +89,7 @@ namespace InventoryPro
 
         private void dataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var selectedItem = dataGrid.SelectedItem as Product;
-            if (selectedItem is not null)
-            {
-                originalProducts.Remove(selectedItem);
-                dataGrid.ItemsSource = null;
-                dataGrid.ItemsSource = originalProducts;
-                selectedProducts.Add(selectedItem);
-                dataGrid2.ItemsSource = null;
-                dataGrid2.ItemsSource = selectedProducts;
-
-                dataGrid.Columns[0].Visibility = Visibility.Collapsed;
-                dataGrid.Columns[2].Visibility = Visibility.Collapsed;
-                dataGrid.Columns[3].Visibility = Visibility.Collapsed;
-                dataGrid2.Columns[1].Visibility = Visibility.Collapsed;
-                dataGrid2.Columns[3].Visibility = Visibility.Collapsed;
-                dataGrid2.Columns[4].Visibility = Visibility.Collapsed;
-            }
+            //
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
@@ -117,6 +101,29 @@ namespace InventoryPro
 
         private void dataGrid2_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+          //
+        }
+
+        private void toRightButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedItem = dataGrid.SelectedItem as Product;
+            if (selectedItem is not null)
+            {
+                originalProducts.Remove(selectedItem);
+                dataGrid.ItemsSource = null;
+                dataGrid.ItemsSource = originalProducts;
+                selectedProducts.Add(selectedItem);
+                dataGrid2.ItemsSource = null;
+                dataGrid2.ItemsSource = selectedProducts;
+
+                dataGrid2.Columns[1].Visibility = Visibility.Collapsed;
+                dataGrid2.Columns[3].Visibility = Visibility.Collapsed;
+                dataGrid2.Columns[4].Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void toLeftButton_Click(object sender, RoutedEventArgs e)
+        {
             var selectedItem = dataGrid2.SelectedItem as Product;
             if (selectedItem is not null)
             {
@@ -127,15 +134,12 @@ namespace InventoryPro
                 dataGrid.ItemsSource = null;
                 dataGrid.ItemsSource = originalProducts;
 
-                dataGrid.Columns[0].Visibility = Visibility.Collapsed;
-                dataGrid.Columns[2].Visibility = Visibility.Collapsed;
-                dataGrid.Columns[3].Visibility = Visibility.Collapsed;
+
                 dataGrid2.Columns[1].Visibility = Visibility.Collapsed;
                 dataGrid2.Columns[3].Visibility = Visibility.Collapsed;
                 dataGrid2.Columns[4].Visibility = Visibility.Collapsed;
 
             }
-
         }
     }
 }

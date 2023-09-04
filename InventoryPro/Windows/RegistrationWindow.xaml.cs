@@ -37,9 +37,7 @@ namespace InventoryPro
             else
             {
                 MessageBox.Show("Niste upisali sve podatke!");
-            }
-       
-
+            }      
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

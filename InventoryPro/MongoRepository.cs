@@ -34,7 +34,7 @@ namespace InventoryPro
 
             var foundUsers = await userCollection.Find(filter).ToListAsync();
             
-
+            
             string retrievedSalt = foundUsers[0].Salt;            
             bool isPasswordCorrect = BCrypt.Net.BCrypt.Verify(userProvidedPassword + retrievedSalt, foundUsers[0].Password);
             if(isPasswordCorrect)
@@ -276,7 +276,7 @@ namespace InventoryPro
             collection.DeleteOne(filter);
         }
 
-        public async Task<int> GetNumberOfOrderedOrders()
+        public async Task<int> GetNumberOfDeliveredOrders()
         {
             List<Order> orders = new List<Order>();
             var collection = database.GetCollection<Order>("orders");
@@ -339,7 +339,7 @@ namespace InventoryPro
             return deliveries;
         }
 
-        public async Task<int> GetNumberOfOrderedDeliveries()
+        public async Task<int> GetNumberOfDeliveredDeliveries()
         {
             List<Delivery> deliveries = new List<Delivery>();
             var collection = database.GetCollection<Delivery>("deliveries");
