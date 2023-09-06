@@ -31,9 +31,7 @@ namespace InventoryPro
             string collectionName = "users";
             var userCollection = database.GetCollection<User>(collectionName);
             var filter = Builders<User>.Filter.Eq("Username", userProvidedUsername);
-
             var foundUsers = await userCollection.Find(filter).ToListAsync();
-
             if (foundUsers.Count > 0)
             {
                 string retrievedSalt = foundUsers[0].Salt;
@@ -51,9 +49,7 @@ namespace InventoryPro
             else
             {
                 return false;
-            }
-            
-
+            }           
         }
 
         public async void AddProduct(string name, int amount, float price)
