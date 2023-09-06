@@ -33,19 +33,26 @@ namespace InventoryPro
             var filter = Builders<User>.Filter.Eq("Username", userProvidedUsername);
 
             var foundUsers = await userCollection.Find(filter).ToListAsync();
-            
-            
-            string retrievedSalt = foundUsers[0].Salt;            
-            bool isPasswordCorrect = BCrypt.Net.BCrypt.Verify(userProvidedPassword + retrievedSalt, foundUsers[0].Password);
-            if(isPasswordCorrect)
+
+            if (foundUsers.Count > 0)
             {
-                return true;
-               
+                string retrievedSalt = foundUsers[0].Salt;
+                bool isPasswordCorrect = BCrypt.Net.BCrypt.Verify(userProvidedPassword + retrievedSalt, foundUsers[0].Password);
+                if (isPasswordCorrect)
+                {
+                    return true;
+
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
                 return false;
             }
+            
 
         }
 
