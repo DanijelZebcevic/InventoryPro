@@ -41,11 +41,19 @@ namespace InventoryPro.Windows
             newContact.Address = addressText.Text;
             newContact.PhoneNumber = phoneNumberText.Text;
             newContact.EmailAddress = emailText.Text;
-            MongoRepository mongoRepository = new MongoRepository();
-            mongoRepository.UpdateContact(passedContact, newContact);
-            ContactsWindow contactsWindow = new ContactsWindow();
-            contactsWindow.Show();
-            this.Close();
+            if (newContact.Name != "")
+            {
+                MongoRepository mongoRepository = new MongoRepository();
+                mongoRepository.UpdateContact(passedContact, newContact);
+                ContactsWindow contactsWindow = new ContactsWindow();
+                contactsWindow.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Morate upisati ime kontakta!");
+            }
+            
         }
 
         private void returnButton_Click(object sender, RoutedEventArgs e)

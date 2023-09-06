@@ -81,10 +81,18 @@ namespace InventoryPro
             {
                 bill.DateOfPurchase = selectedDate.Value.Date;
             }
-            mongoRepository.AddBill(bill);
-            BillsWindow billWindow = new BillsWindow();
-            billWindow.Show();
-            this.Close();
+            if (bill.Items.Count < 1)
+            {
+                MessageBox.Show("Račun ne može biti bez proizvoda!");
+            }
+            else
+            {
+                mongoRepository.AddBill(bill);
+                BillsWindow billWindow = new BillsWindow();
+                billWindow.Show();
+                this.Close();
+            }
+            
         }
 
         private void dataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)

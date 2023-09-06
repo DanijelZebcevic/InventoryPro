@@ -147,11 +147,18 @@ namespace InventoryPro.Windows
             {
                 order.OrderIsDelivered = false;
             }
+            if (order.OrderedItems.Count < 1)
+            {
+                MessageBox.Show("Mora biti unesen barem 1 proizvod u narudžbu!");
+            }
+            else
+            {
+                mongoRepository.UpdateOrder(passedOrder, order);
+                OrderWindow orderWindow = new OrderWindow();
+                orderWindow.Show();
+                this.Close();
+            }
 
-            mongoRepository.UpdateOrder(passedOrder, order);
-            OrderWindow orderWindow = new OrderWindow();
-            orderWindow.Show();
-            this.Close();
 
         }
     }

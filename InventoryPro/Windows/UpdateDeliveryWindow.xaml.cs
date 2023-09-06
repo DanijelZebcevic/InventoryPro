@@ -105,10 +105,17 @@ namespace InventoryPro.Windows
                 delivery.OrderIsDelivered = false;
             }
 
-            mongoRepository.UpdateDelivery(passedDelivery, delivery);
-            DeliveryWindow deliveryWindow = new DeliveryWindow();
-            deliveryWindow.Show();
-            this.Close();
+            if (delivery.DeliveredItems.Count < 1)
+            {
+                MessageBox.Show("Mora biti unesen barem 1 proizvod u dostavu!");
+            }
+            else
+            {
+                mongoRepository.UpdateDelivery(passedDelivery, delivery);
+                DeliveryWindow deliveryWindow = new DeliveryWindow();
+                deliveryWindow.Show();
+                this.Close();
+            }
 
         }
 

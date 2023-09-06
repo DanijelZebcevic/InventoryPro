@@ -63,11 +63,18 @@ namespace InventoryPro.Windows
             {
                 delivery.OrderIsDelivered = false;
             }
-
-            mongoRepository.AddDelivery(delivery);
-            DeliveryWindow deliveryWindow = new DeliveryWindow();
-            deliveryWindow.Show();
-            this.Close();
+            if (delivery.DeliveredItems.Count < 1)
+            {
+                MessageBox.Show("Mora biti unesen barem 1 proizvod u dostavu!");
+            }
+            else
+            {
+                mongoRepository.AddDelivery(delivery);
+                DeliveryWindow deliveryWindow = new DeliveryWindow();
+                deliveryWindow.Show();
+                this.Close();
+            }
+            
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

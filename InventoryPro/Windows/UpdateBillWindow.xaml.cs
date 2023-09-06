@@ -152,10 +152,18 @@ namespace InventoryPro.Windows
             {
                 bill.DateOfPurchase = selectedDate.Value.Date;
             }
-            mongoRepository.UpdateBill(passedBill, bill);
-            BillsWindow billWindow = new BillsWindow();
-            billWindow.Show();
-            this.Close();
+            if (bill.Items.Count < 1)
+            {
+                MessageBox.Show("Račun ne može biti bez proizvoda!");
+            }
+            else
+            {
+                mongoRepository.UpdateBill(passedBill, bill);
+                BillsWindow billWindow = new BillsWindow();
+                billWindow.Show();
+                this.Close();
+            }
+        
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
