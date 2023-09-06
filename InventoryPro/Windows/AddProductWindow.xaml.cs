@@ -26,8 +26,7 @@ namespace InventoryPro
             else
             {
                 MessageBox.Show("Proizvod mora imati ime");
-            }
-            
+            }            
         }
 
         private void returnButton_Click(object sender, RoutedEventArgs e)
