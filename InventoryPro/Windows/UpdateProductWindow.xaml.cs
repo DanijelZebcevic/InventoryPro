@@ -36,12 +36,19 @@ namespace InventoryPro
         private void editButton_Click(object sender, RoutedEventArgs e)
         {
             MongoRepository mongoRepository = new MongoRepository();
-            Product newProduct = new Product { Amount = int.Parse(amountText.Text), Name = nameText.Text, PricePerUnit = float.Parse(priceText.Text) };
-            mongoRepository.UpdateProduct(newProduct, product);
-
-            InventoryWindow inventoryWindow = new InventoryWindow();
-            inventoryWindow.Show();
-            this.Close();
+            Product newProduct = new Product { Amount = int.Parse(amountText.Text), Name = nameText.Text, PricePerUnit = float.Parse(priceText.Text) }
+            if (nameText.Text != "")
+            {
+                mongoRepository.UpdateProduct(newProduct, product);
+                InventoryWindow inventoryWindow = new InventoryWindow();
+                inventoryWindow.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Proizvod mora imati ime!");
+            }
+            
         }
 
         private void returnButton_Click(object sender, RoutedEventArgs e)
