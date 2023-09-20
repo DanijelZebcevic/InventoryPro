@@ -31,7 +31,7 @@
         </Grid.RowDefinitions>
 
 
-        <DataGrid Name="dataGrid" Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="3" MinHeight="100" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="dataGrid_MouseDoubleClick">
+        <DataGrid Style="{StaticResource CustomDataGridStyle}" Name="dataGrid" Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="3" MinHeight="100" IsReadOnly="True" AutoGenerateColumns="False" MouseDoubleClick="dataGrid_MouseDoubleClick">
             <DataGrid.Columns>                
                 <DataGridTemplateColumn Header="Proizvodi">
                     <DataGridTemplateColumn.CellTemplate>

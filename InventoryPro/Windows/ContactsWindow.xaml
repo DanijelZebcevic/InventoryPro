@@ -28,7 +28,7 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DataGrid Name="dataGrid" Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="3"  MinHeight="100" IsReadOnly="True" AutoGenerateColumns="True" MouseDoubleClick="dataGrid_MouseDoubleClick" />
+        <DataGrid Style="{StaticResource CustomDataGridStyle}" Name="dataGrid" Grid.Column="2" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="3"  MinHeight="100" IsReadOnly="True" AutoGenerateColumns="True" MouseDoubleClick="dataGrid_MouseDoubleClick" />
         <Button Style="{StaticResource SuccessButton}" x:Name="addButton" Content="Dodaj" Grid.Column="2" Grid.Row="4" Click="addButton_Click" Margin="0,15,0,0" />
         <Button Style="{StaticResource DangerButton}" x:Name="deleteButton" Content="Obriši" Grid.Column="4" Grid.Row="4" Click="deleteButton_Click" Margin="0,15,0,0"/>
 
